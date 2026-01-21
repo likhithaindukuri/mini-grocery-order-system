@@ -13,6 +13,7 @@ This project is a demo assignment to demonstrate backend architecture, API disci
 
 ## Project Structure
 
+```text
 backend/
 └── MiniGroceryApi/
     ├── Controllers/ → API endpoints (request/response only)
@@ -23,6 +24,7 @@ backend/
 
 frontend/
 └── groceryApp/ → Ionic Angular frontend
+```
 
 
 ---
