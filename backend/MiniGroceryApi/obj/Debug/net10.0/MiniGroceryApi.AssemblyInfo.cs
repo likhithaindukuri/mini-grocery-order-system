@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MiniGroceryApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6ffa4b69f16ae8103de92439d81c47faec75fc4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba22fd2fda925b369706622c578e4b980784bc16")]
 [assembly: System.Reflection.AssemblyProductAttribute("MiniGroceryApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MiniGroceryApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
