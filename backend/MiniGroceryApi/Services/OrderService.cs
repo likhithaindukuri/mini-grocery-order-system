@@ -53,7 +53,7 @@ namespace MiniGroceryApi.Services
         await _orderRepository.AddAsync(order);
 
         await transaction.CommitAsync();
-        return (true, "Order placed successfully.");
+        return (true, $"Order for {product.Name} placed successfully.");
       }
       catch
       {

@@ -5,12 +5,12 @@ import { ProductService } from '../services/product.service';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  standalone: false
 })
 export class HomePage implements OnInit {
 
   products: any[] = [];
-  quantity = 1;
+  quantities: { [productId: number]: number } = {};
   message = '';
 
   constructor(private productService: ProductService) {}
@@ -19,6 +19,9 @@ export class HomePage implements OnInit {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
+        this.products.forEach((product) => {
+          this.quantities[product.id] = 1;
+        });
       },
       error: () => {
         this.message =
@@ -28,7 +31,9 @@ export class HomePage implements OnInit {
   }
 
   order(productId: number) {
-    this.productService.placeOrder(productId, this.quantity).subscribe({
+    const quantity = this.quantities[productId] ?? 1;
+
+    this.productService.placeOrder(productId, quantity).subscribe({
       next: (res) => {
         this.message = res.message;
       },
