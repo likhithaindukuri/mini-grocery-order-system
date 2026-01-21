@@ -1,34 +1,47 @@
-   using Microsoft.EntityFrameworkCore;
-   using MiniGroceryApi.Models;
-   using MiniGroceryApi.Repositories;
-   using MiniGroceryApi.Services;
-   var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using MiniGroceryApi.Models;
+using MiniGroceryApi.Repositories;
+using MiniGroceryApi.Services;
 
-   // Add services to the container.
-   builder.Services.AddControllers();
-   builder.Services.AddEndpointsApiExplorer();
-   builder.Services.AddSwaggerGen();
+var builder = WebApplication.CreateBuilder(args);
 
-   builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=grocery.db"));
+// Add services to the container.
+builder.Services.AddCors(options =>
+{
+  options.AddDefaultPolicy(policy =>
+  {
+    policy.WithOrigins("http://localhost:8100")
+      .AllowAnyHeader()
+      .AllowAnyMethod();
+  });
+});
 
-   builder.Services.AddScoped<IProductRepository, ProductRepository>();
-   builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-   builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-   var app = builder.Build();
+builder.Services.AddDbContext<AppDbContext>(options =>
+  options.UseSqlite("Data Source=grocery.db"));
 
-   // Configure the HTTP request pipeline.
-   if (app.Environment.IsDevelopment())
-   {
-     app.UseSwagger();
-     app.UseSwaggerUI();
-   }
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-   app.UseHttpsRedirection();
+var app = builder.Build();
 
-   app.UseAuthorization();
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+  app.UseSwagger();
+  app.UseSwaggerUI();
+}
 
-   app.MapControllers();
+app.UseCors();
 
-   app.Run();
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

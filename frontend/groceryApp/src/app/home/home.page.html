@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngFor="let product of products">
+    <p>
+      {{ product.name }} - {{ product.price }} -
+      Stock: {{ product.stock }}
+    </p>
+
+    <input
+      type="number"
+      [(ngModel)]="quantity"
+      min="1"
+    />
+
+    <button (click)="order(product.id)">
+      Order
+    </button>
+
+    <hr />
+  </div>
+
+  <p>{{ message }}</p>
+
+</ion-content>
